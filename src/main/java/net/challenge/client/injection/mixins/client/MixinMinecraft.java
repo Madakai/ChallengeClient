@@ -19,8 +19,6 @@ import net.challenge.client.core.info.IClientInfo;
 import net.challenge.client.events.KeyEvent;
 import net.challenge.client.events.WorldEvent;
 import net.challenge.client.ui.animation.AnimationUtil;
-import net.challenge.client.ui.hud.customHud.GuiCustomHud;
-import net.challenge.client.ui.screen.SettingScreen;
 import net.challenge.client.utils.BlurUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
