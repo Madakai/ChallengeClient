@@ -12,9 +12,12 @@ import net.challenge.client.features.teammate.ITeammateHandler
 import net.challenge.client.ui.hud.customHud.GuiCustomHud
 import net.challenge.client.ui.hud.customHud.renderer.HudRenderer
 import net.challenge.client.ui.widget.utils.RenderUtils
+import net.challenge.configu.value.VTag
+import net.challenge.configu.value.impl.VBool
 import net.minecraft.client.gui.ScaledResolution
 import java.awt.Color
 import java.util.function.Predicate
+import kotlin.math.roundToInt
 
 /**
  * All team members must be at the same height,
@@ -29,6 +32,9 @@ class SameHeightChallenge(
         private val teammateHandler: ITeammateHandler
 
 ) : Module() {
+
+    @VTag("OnlyVisible", "Only visible players")
+    private val onlyVisible = VBool(true)
 
     @EventHandler
     private val render2DListener: Listener<Render2DEvent> = Listener(
@@ -50,11 +56,11 @@ class SameHeightChallenge(
 
         teammateHandler.getPlayers().forEach { teammateName ->
             val entity = mc.theWorld.loadedEntityList
-                    .firstOrNull { entity -> entity.name.equals(teammateName, true) }
+                    .firstOrNull { entity -> entity.name.equals(teammateName, true) && (entity.isInvisible.not() || onlyVisible.value.not()) }
                     ?: return@forEach
 
             if (!entity.name.equals(teammateName, true)) return@forEach
-            if (entity.posY == playerPosY) return@forEach
+            if (entity.posY.roundToInt() == playerPosY.roundToInt()) return@forEach
 
             return true
         }
