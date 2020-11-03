@@ -14,6 +14,7 @@
 
 package net.challenge.client.ui.hud.customHud
 
+import de.madakai.challenge.gui.ClickGui
 import net.challenge.client.core.ClientCore
 import net.challenge.client.ui.hud.customHud.element.IHudElement
 import net.challenge.client.ui.hud.customHud.element.IHudPreview
@@ -79,8 +80,9 @@ class GuiCustomHud : GuiScreen() {
 
     override fun keyTyped(key: Char, keyCode: Int) {
         if (keyCode == Keyboard.KEY_S) {
-            settingScreen = SettingScreen()
-            mc.displayGuiScreen(settingScreen)
+            //settingScreen = SettingScreen()
+            //mc.displayGuiScreen(settingScreen)
+            mc.displayGuiScreen(ClickGui())
         }
 
         super.keyTyped(key, keyCode)
